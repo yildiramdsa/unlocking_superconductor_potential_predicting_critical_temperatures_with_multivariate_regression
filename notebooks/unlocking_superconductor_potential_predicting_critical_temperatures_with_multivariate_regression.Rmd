@@ -9,10 +9,29 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-library(ggplot2)
 library(GGally)
+library(ggplot2)
 library(mctest)
 library(olsrr)
+
+plot_ggpairs <- function(data) {
+  ggpairs(
+    data,
+    lower = list(
+      continuous = wrap("smooth", method = "loess", color = "red"),
+      combo = "facethist",
+      discrete = "facetbar",
+      na = "na"
+    ),
+    upper = list(
+      continuous = "cor"
+    ),
+    diag = list(
+      continuous = "densityDiag"
+    )
+  ) +
+    theme_bw()
+}
 ```
 
 ```{r}
@@ -162,50 +181,14 @@ atomic_mass = superconductivity[, c("mean_atomic_mass", "wtd_mean_atomic_mass",
                                     "gmean_atomic_mass", "wtd_gmean_atomic_mass",
                                     "entropy_atomic_mass", "range_atomic_mass",
                                     "std_atomic_mass")]
-```
-
-```{r}
-ggpairs(
-  atomic_mass,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(atomic_mass)
 ```
 
 ```{r}
 fie = superconductivity[, c("mean_fie", "wtd_mean_fie", "gmean_fie", "wtd_gmean_fie",
                             "entropy_fie", "wtd_entropy_fie", "range_fie",
                             "wtd_range_fie", "std_fie")]
-```
-
-```{r}
-ggpairs(
-  fie,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(fie)
 ```
 
 ```{r}
@@ -214,50 +197,14 @@ atomic_radius = superconductivity[, c("mean_atomic_radius", "wtd_mean_atomic_rad
                                       "wtd_entropy_atomic_radius", "range_atomic_radius",
                                       "wtd_range_atomic_radius", "std_atomic_radius",
                                       "wtd_std_atomic_radius" )]
-```
-
-```{r}
-ggpairs(
-  atomic_radius,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(atomic_radius)
 ```
 
 ```{r}
 density = superconductivity[, c("mean_Density", "gmean_Density", "wtd_gmean_Density",
                                 "entropy_Density", "wtd_entropy_Density",
                                 "range_Density", "std_Density", "wtd_std_Density")]
-```
-
-```{r}
-ggpairs(
-  density,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(density)
 ```
 
 ```{r}
@@ -266,25 +213,7 @@ ElectronAffinity = superconductivity[, c("mean_ElectronAffinity", "wtd_mean_Elec
                                          "wtd_entropy_ElectronAffinity", "range_ElectronAffinity",
                                          "wtd_range_ElectronAffinity", "std_ElectronAffinity",
                                          "wtd_std_ElectronAffinity")]
-```
-
-```{r}
-ggpairs(
-  ElectronAffinity,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(ElectronAffinity)
 ```
 
 ```{r}
@@ -293,25 +222,7 @@ FusionHeat = superconductivity[, c("mean_FusionHeat", "wtd_mean_FusionHeat",
                                    "entropy_FusionHeat", "wtd_entropy_FusionHeat",
                                    "range_FusionHeat", "wtd_range_FusionHeat",
                                    "wtd_std_FusionHeat")]
-```
-
-```{r}
-ggpairs(
-  FusionHeat,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(FusionHeat)
 ```
 
 ```{r}
@@ -323,49 +234,13 @@ ThermalConductivity = superconductivity[, c("mean_ThermalConductivity",
                                             "range_ThermalConductivity",
                                             "wtd_range_ThermalConductivity",
                                             "std_ThermalConductivity")]
-```
-
-```{r}
-ggpairs(
-  ThermalConductivity,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(ThermalConductivity)
 ```
 
 ```{r}
 Valence = superconductivity[, c("gmean_Valence", "wtd_gmean_Valence", "entropy_Valence",
                                 "wtd_entropy_Valence", "range_Valence", "wtd_std_Valence")]
-```
-
-```{r}
-ggpairs(
-  Valence,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(Valence)
 ```
 
 ```{r}
@@ -569,7 +444,7 @@ summary(reduced_temp_model_1)
 ```
 
 ```{r}
-imcdiag(reduced_temp_model_1, method = "VIF")
+imcdiag(reduced_temp_model_1, method="VIF")
 ```
 
 ```{r}
@@ -577,25 +452,7 @@ reduced_data_part_1 = superconductivity[, c("number_of_elements", "mean_atomic_m
                                             "wtd_mean_atomic_mass", "entropy_atomic_mass",
                                             "wtd_mean_fie", "entropy_fie",
                                             "wtd_entropy_fie", "wtd_range_fie")]
-```
-
-```{r}
-ggpairs(
-  reduced_data_part_1,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(reduced_data_part_1)
 ```
 
 ```{r}
@@ -603,25 +460,7 @@ reduced_data_part_2 = superconductivity[, c("wtd_mean_atomic_radius", "entropy_a
                                             "range_atomic_radius", "mean_Density",
                                             "gmean_Density", "entropy_Density",
                                             "wtd_entropy_Density")]
-```
-
-```{r}
-ggpairs(
-  reduced_data_part_2,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(reduced_data_part_2)
 ```
 
 ```{r}
@@ -630,25 +469,7 @@ reduced_data_part_3 = superconductivity[, c("mean_ElectronAffinity", "wtd_mean_E
                                             "wtd_range_ElectronAffinity", "entropy_FusionHeat",
                                             "wtd_entropy_FusionHeat", "wtd_mean_ThermalConductivity",
                                             "wtd_range_ThermalConductivity")]
-```
-
-```{r}
-ggpairs(
-  reduced_data_part_3,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(reduced_data_part_3)
 ```
 
 ```{r}
@@ -662,7 +483,7 @@ summary(model_r)
 ```
 
 ```{r}
-imcdiag(model_r, method = "VIF")
+imcdiag(model_r, method="VIF")
 ```
 
 ```{r}
@@ -670,25 +491,7 @@ reduced_data_part_4 = superconductivity[, c("number_of_elements", "wtd_mean_fie"
                                             "wtd_entropy_fie", "wtd_range_fie",
                                             "entropy_atomic_radius", "wtd_mean_ElectronAffinity",
                                             "wtd_range_ElectronAffinity", "entropy_FusionHeat")]
-```
-
-```{r}
-ggpairs(
-  reduced_data_part_4,
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "red"),
-    combo = "facethist",
-    discrete = "facetbar",
-    na = "na"
-  ),
-  upper = list(
-    continuous = "cor"
-  ),
-  diag = list(
-    continuous = "densityDiag"
-  )
-)+
-  theme_bw()
+plot_ggpairs(reduced_data_part_4)
 ```
 
 ```{r}
@@ -709,7 +512,7 @@ summary(model_g)
 ```
 
 ```{r}
-imcdiag(model_g, method = "VIF")
+imcdiag(model_g, method="VIF")
 ```
 
 ```{r}
@@ -723,7 +526,7 @@ summary(model_g_int)
 ```
 
 ```{r}
-model_g_int_reduced = ols_step_forward_p(model_g_int, p_val = 0.01, details=TRUE)
+model_g_int_reduced = ols_step_forward_p(model_g_int, p_val=0.01, details=TRUE)
 summary(model_g_int_reduced$model)
 ```
 
@@ -812,8 +615,6 @@ model_reduced_2 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConduct
                      +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
 summary(model_reduced_2)
 ```
-
-range_atomic_radius:mean_ElectronAffinity
 
 ```{r}
 final_model = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity

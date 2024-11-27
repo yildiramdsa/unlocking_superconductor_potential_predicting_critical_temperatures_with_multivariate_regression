@@ -52,129 +52,128 @@ temp_model = lm(critical_temp~., data=superconductivity)
 summary(temp_model)
 ```
 
+All non-significant ($\alpha$ = 0.01) variables will be removed manually:
+
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density, data=superconductivity)
-summary(temp_model)
+temp_model_reduced_1 = lm(critical_temp~.-wtd_range_Density, data=superconductivity)
+summary(temp_model_reduced_1)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density,
+temp_model_reduced_2 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density,
                 data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_2)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_3 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity, data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_3)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density
+temp_model_reduced_4 = lm(critical_temp~.-wtd_range_Density
                 -wtd_mean_Density-wtd_std_ThermalConductivity
                 -wtd_entropy_ThermalConductivity, data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_4)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_5 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius, data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_5)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_6 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass, data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_6)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_7 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass,
                 data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_7)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_8 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
                 -wtd_range_Valence, data=superconductivity)
-summary(temp_model)
+summary(temp_model_reduced_8)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_9 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
-                -wtd_range_Valence-wtd_std_fie, data = superconductivity)
-summary(temp_model)
+                -wtd_range_Valence-wtd_std_fie, data=superconductivity)
+summary(temp_model_reduced_9)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_10 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass
                 -wtd_range_atomic_mass-wtd_range_Valence
-                -wtd_std_fie-wtd_std_atomic_mass, data = superconductivity)
-summary(temp_model)
+                -wtd_std_fie-wtd_std_atomic_mass, data=superconductivity)
+summary(temp_model_reduced_10)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_11 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
                 -wtd_range_Valence-wtd_std_fie-wtd_std_atomic_mass
-                -entropy_ElectronAffinity, data = superconductivity)
-summary(temp_model)
+                -entropy_ElectronAffinity, data=superconductivity)
+summary(temp_model_reduced_11)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_12 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
                 -wtd_range_Valence-wtd_std_fie-wtd_std_atomic_mass
-                -entropy_ElectronAffinity-std_FusionHeat, data = superconductivity)
-summary(temp_model)
+                -entropy_ElectronAffinity-std_FusionHeat, data=superconductivity)
+summary(temp_model_reduced_12)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_13 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
                 -wtd_range_Valence-wtd_std_fie-wtd_std_atomic_mass
                 -entropy_ElectronAffinity-std_FusionHeat-mean_Valence, 
-                data = superconductivity)
-summary(temp_model)
+                data=superconductivity)
+summary(temp_model_reduced_13)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_14 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
                 -wtd_range_Valence-wtd_std_fie-wtd_std_atomic_mass
                 -entropy_ElectronAffinity-std_FusionHeat-mean_Valence
-                -std_Valence, data = superconductivity)
-summary(temp_model)
+                -std_Valence, data=superconductivity)
+summary(temp_model_reduced_14)
 ```
 
 ```{r}
-temp_model = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
+temp_model_reduced_15 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -wtd_std_ThermalConductivity-wtd_entropy_ThermalConductivity
                 -gmean_atomic_radius-wtd_entropy_atomic_mass-wtd_range_atomic_mass
                 -wtd_range_Valence-wtd_std_fie-wtd_std_atomic_mass-entropy_ElectronAffinity
                 -std_FusionHeat-mean_Valence-std_Valence-wtd_mean_Valence,
-                data = superconductivity)
-summary(temp_model)
+                data=superconductivity)
+summary(temp_model_reduced_15)
 ```
 
-```{r}
-pairs(~mean_atomic_mass+wtd_mean_atomic_mass+gmean_atomic_mass+wtd_gmean_atomic_mass
-      +entropy_atomic_mass+range_atomic_mass+std_atomic_mass, data=superconductivit)
-``` 
+To identify correlations between predictor variables (potential multicollinearity):
 
 ```{r}
 atomic_mass = superconductivity[, c("mean_atomic_mass", "wtd_mean_atomic_mass",
@@ -243,8 +242,10 @@ Valence = superconductivity[, c("gmean_Valence", "wtd_gmean_Valence", "entropy_V
 plot_ggpairs(Valence)
 ```
 
+All highly correlated (> 0.9) variables will be removed:
+
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
+temp_model_reduced_16 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_mean_atomic_mass+entropy_atomic_mass+range_atomic_mass
                          +mean_fie+wtd_mean_fie+entropy_fie+wtd_entropy_fie
                          +range_fie+wtd_range_fie+mean_atomic_radius
@@ -260,13 +261,13 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_mean_ThermalConductivity+gmean_ThermalConductivity
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +range_ThermalConductivity+wtd_range_ThermalConductivity
-                         +gmean_Valence+ entropy_Valence+range_Valence+wtd_std_Valence,
+                         +gmean_Valence+entropy_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_16)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
+temp_model_reduced_17 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_mean_atomic_mass+entropy_atomic_mass+range_atomic_mass
                          +mean_fie+wtd_mean_fie+entropy_fie+wtd_entropy_fie+range_fie
                          +wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
@@ -282,11 +283,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +entropy_ThermalConductivity+range_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+entropy_Valence
                          +range_Valence+wtd_std_Valence, data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_17)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
+temp_model_reduced_18 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_mean_atomic_mass+entropy_atomic_mass+range_atomic_mass
                          +mean_fie+wtd_mean_fie+entropy_fie+wtd_entropy_fie+range_fie
                          +wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
@@ -302,11 +303,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +entropy_ThermalConductivity+wtd_range_ThermalConductivity
                          +gmean_Valence+ entropy_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_18)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
+temp_model_reduced_19 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_mean_atomic_mass+entropy_atomic_mass+range_atomic_mass
                          +mean_fie+wtd_mean_fie+entropy_fie+wtd_entropy_fie+range_fie
                          +wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
@@ -321,11 +322,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +gmean_ThermalConductivity+wtd_gmean_ThermalConductivity
                          +entropy_ThermalConductivity+wtd_range_ThermalConductivity
                          +gmean_Valence+range_Valence+wtd_std_Valence, data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_19)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
+temp_model_reduced_20 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_mean_atomic_mass+entropy_atomic_mass+range_atomic_mass
                          +mean_fie+wtd_mean_fie+entropy_fie+wtd_entropy_fie+range_fie
                          +wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
@@ -340,11 +341,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence
                          +wtd_std_Valence, data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_20)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_21 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                          +entropy_atomic_mass+range_atomic_mass+mean_fie+wtd_mean_fie
                          +entropy_fie+wtd_entropy_fie+range_fie+wtd_range_fie+mean_atomic_radius
                          +wtd_mean_atomic_radius+entropy_atomic_radius+range_atomic_radius
@@ -357,11 +358,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_m
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_modell_reduced_21)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_22 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                          +entropy_atomic_mass+range_atomic_mass+wtd_mean_fie+entropy_fie
                          +wtd_entropy_fie+range_fie+wtd_range_fie+mean_atomic_radius
                          +wtd_mean_atomic_radius+entropy_atomic_radius+range_atomic_radius
@@ -374,11 +375,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_m
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_22)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_23 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                          +entropy_atomic_mass+range_atomic_mass+wtd_mean_fie+entropy_fie
                          +wtd_entropy_fie+wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
                          +entropy_atomic_radius+range_atomic_radius+wtd_range_atomic_radius
@@ -391,11 +392,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_m
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_23)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_24 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                          +entropy_atomic_mass+range_atomic_mass+wtd_mean_fie+entropy_fie
                          +wtd_entropy_fie+range_fie+wtd_range_fie+mean_atomic_radius
                          +wtd_mean_atomic_radius+entropy_atomic_radius+range_atomic_radius
@@ -408,11 +409,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_m
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence
                          +wtd_std_Valence, data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_24)
 ```
 
 ```{r}
-reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_25 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                          +entropy_atomic_mass+range_atomic_mass+wtd_mean_fie+entropy_fie
                          +wtd_entropy_fie+wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
                          +entropy_atomic_radius+range_atomic_radius+wtd_range_atomic_radius
@@ -424,11 +425,11 @@ reduced_temp_model1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_m
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(reduced_temp_model1)
+summary(temp_model_reduced_25)
 ```
 
 ```{r}
-reduced_temp_model_1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_26 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                           +entropy_atomic_mass+range_atomic_mass+wtd_mean_fie+entropy_fie
                           +wtd_entropy_fie+wtd_range_fie+mean_atomic_radius+wtd_mean_atomic_radius
                           +entropy_atomic_radius+range_atomic_radius+wtd_range_atomic_radius
@@ -440,11 +441,11 @@ reduced_temp_model_1 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd_
                           +wtd_mean_ThermalConductivity+wtd_gmean_ThermalConductivity
                           +entropy_ThermalConductivity+wtd_range_ThermalConductivity
                           +range_Valence+wtd_std_Valence, data=superconductivity)
-summary(reduced_temp_model_1)
+summary(temp_model_reduced_26)
 ```
 
 ```{r}
-imcdiag(reduced_temp_model_1, method="VIF")
+imcdiag(temp_model_reduced_26, method="VIF")
 ```
 
 ```{r}
@@ -473,17 +474,17 @@ plot_ggpairs(reduced_data_part_3)
 ```
 
 ```{r}
-model_r = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_27 = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
              +wtd_mean_fie+wtd_entropy_fie+wtd_range_fie+wtd_mean_atomic_radius
              +entropy_atomic_radius+range_atomic_radius+mean_Density+wtd_entropy_Density
              +mean_ElectronAffinity+wtd_mean_ElectronAffinity+wtd_entropy_ElectronAffinity
              +wtd_range_ElectronAffinity+entropy_FusionHeat+wtd_mean_ThermalConductivity,
              data=superconductivity)
-summary(model_r)
+summary(temp_model_reduced_27)
 ```
 
 ```{r}
-imcdiag(model_r, method="VIF")
+imcdiag(temp_model_reduced_27, method="VIF")
 ```
 
 ```{r}
@@ -495,43 +496,49 @@ plot_ggpairs(reduced_data_part_4)
 ```
 
 ```{r}
-model_r = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_28 = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
              +wtd_mean_fie+wtd_entropy_fie+wtd_range_fie+wtd_mean_atomic_radius
              +range_atomic_radius+mean_Density+wtd_entropy_Density+mean_ElectronAffinity
              +wtd_mean_ElectronAffinity+wtd_entropy_ElectronAffinity+wtd_mean_ThermalConductivity,
              data=superconductivity)
-summary(model_r)
+summary(temp_model_reduced_28)
 ```
 
 ```{r}
-model_g = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_reduced_29 = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
              +wtd_mean_fie+wtd_entropy_fie+wtd_mean_atomic_radius+range_atomic_radius
              +mean_Density+wtd_entropy_Density+mean_ElectronAffinity+wtd_mean_ElectronAffinity
              +wtd_entropy_ElectronAffinity+wtd_mean_ThermalConductivity, data=superconductivity)
-summary(model_g)
+summary(temp_model_reduced_29)
 ```
 
 ```{r}
-imcdiag(model_g, method="VIF")
+imcdiag(temp_model_reduced_29, method="VIF")
 ```
 
+According to the output, the predictors are not affected by multicollinearity.
+
+The model will be expanded to include interaction terms:
+
 ```{r}
-model_g_int = lm(critical_temp ~ (number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_int = lm(critical_temp ~ (number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
                                   +wtd_mean_fie+wtd_entropy_fie+wtd_mean_atomic_radius
                                   +range_atomic_radius+mean_Density+wtd_entropy_Density
                                   +mean_ElectronAffinity+wtd_mean_ElectronAffinity
                                   +wtd_entropy_ElectronAffinity+wtd_mean_ThermalConductivity)^2,
                  data=superconductivity)
-summary(model_g_int)
+summary(temp_model_int)
+```
+
+Non-significant variables will be removed using a forward selection approach:
+
+```{r}
+temp_model_int_reduced_1 = ols_step_forward_p(model_g_int, p_val=0.01, details=FALSE)
+summary(temp_model_int_reduced_1$model)
 ```
 
 ```{r}
-model_g_int_reduced = ols_step_forward_p(model_g_int, p_val=0.01, details=TRUE)
-summary(model_g_int_reduced$model)
-```
-
-```{r}
-model_reduced_1 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity
+temp_model_int_reduced_2 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity
                      +wtd_mean_ElectronAffinity+wtd_mean_atomic_radius+mean_atomic_mass
                      +wtd_mean_fie+wtd_entropy_ElectronAffinity+wtd_entropy_Density
                      +wtd_mean_atomic_mass+mean_ElectronAffinity+mean_Density
@@ -572,11 +579,13 @@ model_reduced_1 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConduct
                      +number_of_elements:wtd_mean_fie+wtd_mean_fie:wtd_mean_ElectronAffinity
                      +wtd_entropy_fie:wtd_entropy_ElectronAffinity+wtd_entropy_fie:wtd_entropy_Density
                      +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
-summary(model_reduced_1)
+summary(temp_model_int_reduced_2)
 ```
 
+The remaining non-significant ($\alpha$ = 0.01) variables will be removed manually:
+
 ```{r}
-model_reduced_2 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity
+temp_model_int_reduced_3 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity
                      +wtd_mean_ElectronAffinity+wtd_mean_atomic_radius+mean_atomic_mass
                      +wtd_mean_fie+wtd_entropy_ElectronAffinity+wtd_entropy_Density
                      +wtd_mean_atomic_mass+mean_ElectronAffinity+mean_Density+number_of_elements
@@ -613,7 +622,7 @@ model_reduced_2 = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConduct
                      +number_of_elements:wtd_mean_fie+wtd_mean_fie:wtd_mean_ElectronAffinity
                      +wtd_entropy_fie:wtd_entropy_ElectronAffinity+wtd_entropy_fie:wtd_entropy_Density
                      +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
-summary(model_reduced_2)
+summary(temp_model_int_reduced_3)
 ```
 
 ```{r}

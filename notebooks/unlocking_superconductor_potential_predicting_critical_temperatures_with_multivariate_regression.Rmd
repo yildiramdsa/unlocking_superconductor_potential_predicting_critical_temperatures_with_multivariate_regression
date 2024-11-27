@@ -28,7 +28,8 @@ plot_ggpairs <- function(data) {
     ),
     diag = list(
       continuous = "densityDiag"
-    )
+    ),
+    progress = FALSE
   ) +
     theme_bw()
 }
@@ -52,7 +53,7 @@ temp_model = lm(critical_temp~., data=superconductivity)
 summary(temp_model)
 ```
 
-All non-significant ($\alpha$ = 0.01) variables will be removed manually:
+All non-significant ($\alpha$ = 0.05) variables will be removed manually:
 
 ```{r}
 temp_model_reduced_1 = lm(critical_temp~.-wtd_range_Density, data=superconductivity)
@@ -162,6 +163,8 @@ temp_model_reduced_14 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
                 -std_Valence, data=superconductivity)
 summary(temp_model_reduced_14)
 ```
+
+The following is the model including all significant variables:
 
 ```{r}
 temp_model_reduced_15 = lm(critical_temp~.-wtd_range_Density-wtd_mean_Density
@@ -358,7 +361,7 @@ temp_model_reduced_21 = lm(critical_temp~number_of_elements+mean_atomic_mass+wtd
                          +wtd_gmean_ThermalConductivity+entropy_ThermalConductivity
                          +wtd_range_ThermalConductivity+gmean_Valence+range_Valence+wtd_std_Valence,
                          data=superconductivity)
-summary(temp_modell_reduced_21)
+summary(temp_model_reduced_21)
 ```
 
 ```{r}
@@ -518,6 +521,10 @@ imcdiag(temp_model_reduced_29, method="VIF")
 
 According to the output, the predictors are not affected by multicollinearity.
 
+```{r}
+anova(temp_model_reduced_29, temp_model)
+```
+
 The model will be expanded to include interaction terms:
 
 ```{r}
@@ -664,4 +671,8 @@ final_model = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivit
                  +wtd_entropy_fie:wtd_entropy_ElectronAffinity+wtd_entropy_fie:wtd_entropy_Density
                  +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
 summary(final_model)
+```
+
+```{r}
+anova(final_model, temp_model_int)
 ```

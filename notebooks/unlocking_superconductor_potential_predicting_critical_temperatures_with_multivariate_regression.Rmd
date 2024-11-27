@@ -103,7 +103,7 @@ pairs(~ mean_atomic_mass+wtd_mean_atomic_mass+gmean_atomic_mass+wtd_gmean_atomic
 ``` 
 
 ```{r}
-atomic_mass = superconductivity[,c("mean_atomic_mass", "wtd_mean_atomic_mass", "gmean_atomic_mass", "wtd_gmean_atomic_mass", "entropy_atomic_mass", "range_atomic_mass", "std_atomic_mass")]
+atomic_mass = superconductivity[, c("mean_atomic_mass", "wtd_mean_atomic_mass", "gmean_atomic_mass", "wtd_gmean_atomic_mass", "entropy_atomic_mass", "range_atomic_mass", "std_atomic_mass")]
 ```
 
 ```{r}
@@ -125,7 +125,7 @@ ggpairs(
   theme_bw()
 ```
 ```{r}
-fie = superconductivity[,c("mean_fie", "wtd_mean_fie", "gmean_fie", "wtd_gmean_fie", "entropy_fie", "wtd_entropy_fie", "range_fie", "wtd_range_fie", "std_fie")]
+fie = superconductivity[, c("mean_fie", "wtd_mean_fie", "gmean_fie", "wtd_gmean_fie", "entropy_fie", "wtd_entropy_fie", "range_fie", "wtd_range_fie", "std_fie")]
 ```
 
 ```{r}
@@ -147,7 +147,7 @@ ggpairs(
   theme_bw()
 ```
 ```{r}
-atomic_radius = superconductivity[,c("mean_atomic_radius", "wtd_mean_atomic_radius", "wtd_gmean_atomic_radius", "entropy_atomic_radius", "wtd_entropy_atomic_radius", "range_atomic_radius", "wtd_range_atomic_radius", "std_atomic_radius", "wtd_std_atomic_radius" )]
+atomic_radius = superconductivity[, c("mean_atomic_radius", "wtd_mean_atomic_radius", "wtd_gmean_atomic_radius", "entropy_atomic_radius", "wtd_entropy_atomic_radius", "range_atomic_radius", "wtd_range_atomic_radius", "std_atomic_radius", "wtd_std_atomic_radius" )]
 ```
 
 ```{r}
@@ -169,7 +169,7 @@ ggpairs(
   theme_bw()
 ```
 ```{r}
-density = superconductivity[,c("mean_Density", "gmean_Density", "wtd_gmean_Density", "entropy_Density", "wtd_entropy_Density", "range_Density", "std_Density", "wtd_std_Density")]
+density = superconductivity[, c("mean_Density", "gmean_Density", "wtd_gmean_Density", "entropy_Density", "wtd_entropy_Density", "range_Density", "std_Density", "wtd_std_Density")]
 
 ```
 
@@ -192,8 +192,7 @@ ggpairs(
   theme_bw()
 ```
 ```{r}
-ElectronAffinity = superconductivity[,c("mean_ElectronAffinity", "wtd_mean_ElectronAffinity", "gmean_ElectronAffinity", "wtd_gmean_ElectronAffinity", "wtd_entropy_ElectronAffinity", "range_ElectronAffinity", "wtd_range_ElectronAffinity", "std_ElectronAffinity", "wtd_std_ElectronAffinity")]
-
+ElectronAffinity = superconductivity[, c("mean_ElectronAffinity", "wtd_mean_ElectronAffinity", "gmean_ElectronAffinity", "wtd_gmean_ElectronAffinity", "wtd_entropy_ElectronAffinity", "range_ElectronAffinity", "wtd_range_ElectronAffinity", "std_ElectronAffinity", "wtd_std_ElectronAffinity")]
 ```
 
 ```{r}
@@ -216,7 +215,7 @@ ggpairs(
 ```
 
 ```{r}
-FusionHeat = superconductivity[,c("mean_FusionHeat", "wtd_mean_FusionHeat", "gmean_FusionHeat", "wtd_gmean_FusionHeat", "entropy_FusionHeat", "wtd_entropy_FusionHeat", "range_FusionHeat", "wtd_range_FusionHeat", "wtd_std_FusionHeat")]
+FusionHeat = superconductivity[, c("mean_FusionHeat", "wtd_mean_FusionHeat", "gmean_FusionHeat", "wtd_gmean_FusionHeat", "entropy_FusionHeat", "wtd_entropy_FusionHeat", "range_FusionHeat", "wtd_range_FusionHeat", "wtd_std_FusionHeat")]
 ```
 
 ```{r}
@@ -239,7 +238,7 @@ ggpairs(
 ```
 
 ```{r}
-ThermalConductivity = superconductivity[,c("mean_ThermalConductivity", "wtd_mean_ThermalConductivity", "gmean_ThermalConductivity", "wtd_gmean_ThermalConductivity", "entropy_ThermalConductivity", "range_ThermalConductivity", "wtd_range_ThermalConductivity", "std_ThermalConductivity")]
+ThermalConductivity = superconductivity[, c("mean_ThermalConductivity", "wtd_mean_ThermalConductivity", "gmean_ThermalConductivity", "wtd_gmean_ThermalConductivity", "entropy_ThermalConductivity", "range_ThermalConductivity", "wtd_range_ThermalConductivity", "std_ThermalConductivity")]
 ```
 
 ```{r}
@@ -261,7 +260,7 @@ ggpairs(
   theme_bw()
 ```
 ```{r}
-Valence = superconductivity[,c("gmean_Valence", "wtd_gmean_Valence", "entropy_Valence", "wtd_entropy_Valence", "range_Valence", "wtd_std_Valence")]
+Valence = superconductivity[, c("gmean_Valence", "wtd_gmean_Valence", "entropy_Valence", "wtd_entropy_Valence", "range_Valence", "wtd_std_Valence")]
 ```
 
 ```{r}
@@ -412,7 +411,7 @@ imcdiag(model_r, method = "VIF")
 ```
 
 ```{r}
-reduced_data_part_4 = superconductivity[,c("number_of_elements", "wtd_mean_fie", "wtd_entropy_fie", "wtd_range_fie", "entropy_atomic_radius", "wtd_mean_ElectronAffinity", "wtd_range_ElectronAffinity", "entropy_FusionHeat")]
+reduced_data_part_4 = superconductivity[, c("number_of_elements", "wtd_mean_fie", "wtd_entropy_fie", "wtd_range_fie", "entropy_atomic_radius", "wtd_mean_ElectronAffinity", "wtd_range_ElectronAffinity", "entropy_FusionHeat")]
 ```
 
 ```{r}

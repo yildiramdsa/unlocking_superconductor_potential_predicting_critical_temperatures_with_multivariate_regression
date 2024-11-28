@@ -8,8 +8,6 @@ date: "2024-11-26"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-APPENDIX
-
 ```{r}
 library(GGally)
 library(ggplot2)
@@ -479,13 +477,13 @@ plot_ggpairs(reduced_data_part_3)
 ```
 
 ```{r}
-temp_model_reduced_27 = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
+temp_model_additive_reduced_27 = lm(critical_temp ~ number_of_elements+mean_atomic_mass+wtd_mean_atomic_mass
              +wtd_mean_fie+wtd_entropy_fie+wtd_range_fie+wtd_mean_atomic_radius
              +entropy_atomic_radius+range_atomic_radius+mean_Density+wtd_entropy_Density
              +mean_ElectronAffinity+wtd_mean_ElectronAffinity+wtd_entropy_ElectronAffinity
              +wtd_range_ElectronAffinity+entropy_FusionHeat+wtd_mean_ThermalConductivity,
              data=superconductivity)
-summary(temp_model_reduced_27)
+summary(temp_model_additive_reduced_27)
 ```
 
 ```{r}

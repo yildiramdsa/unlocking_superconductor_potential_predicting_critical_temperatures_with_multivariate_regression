@@ -737,3 +737,15 @@ summary(final_model_linearity_ass)
 ggplot(final_model_linearity_ass, aes(x=.fitted, y=.resid)) + geom_point() + geom_smooth() +
   geom_hline(yintercept=0)
 ```
+
+### Independence Assumption
+
+The independence assumption in regression means that residuals should not influence each other. Since our data is not time-series and there is no natural order or dependency between observations, this assumption is likely satisfied. Meeting this assumption ensures that the results are reliable and not affected by biased standard errors.
+
+### Equal Variance Assumption
+
+```{r}
+
+
+
+```

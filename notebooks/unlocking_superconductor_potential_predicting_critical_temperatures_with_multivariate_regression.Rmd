@@ -13,6 +13,7 @@ library(GGally)
 library(ggplot2)
 library(mctest)
 library(olsrr)
+library(lmtest)
 
 plot_ggpairs <- function(data) {
   ggpairs(
@@ -694,7 +695,7 @@ plot_ggpairs(final_data)
 ```
 
 ```{r}
-final_model_linearity_ass = lm(log(critical_temp) ~ range_atomic_radius:wtd_mean_ThermalConductivity
+temp_model_linearity_ass = lm(log(critical_temp) ~ range_atomic_radius:wtd_mean_ThermalConductivity
                  +wtd_mean_ElectronAffinity+wtd_mean_atomic_radius+mean_atomic_mass
                  +wtd_mean_fie+wtd_entropy_ElectronAffinity+wtd_entropy_Density+wtd_mean_atomic_mass
                  +mean_ElectronAffinity+mean_Density+number_of_elements+wtd_entropy_fie
@@ -730,12 +731,91 @@ final_model_linearity_ass = lm(log(critical_temp) ~ range_atomic_radius:wtd_mean
                  +number_of_elements:wtd_mean_fie+wtd_mean_fie:wtd_mean_ElectronAffinity
                  +wtd_entropy_fie:wtd_entropy_ElectronAffinity+wtd_entropy_fie:wtd_entropy_Density
                  +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
-summary(final_model_linearity_ass)
+summary(temp_model_linearity_ass)
 ```
 
 ```{r}
-ggplot(final_model_linearity_ass, aes(x=.fitted, y=.resid)) + geom_point() + geom_smooth() +
-  geom_hline(yintercept=0)
+ggplot(temp_model_linearity_ass, aes(x=.fitted, y=.resid)) + geom_point() + geom_smooth() +
+  geom_hline(yintercept=0) + ggtitle("Residual plot: Residual vs Fitted values")
+```
+
+```{r}
+superconductivity$log_critical_temp <- log(superconductivity$critical_temp)
+
+temp_model_linearity_ass <- lm(
+    log_critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity
+    + wtd_mean_ElectronAffinity + wtd_mean_atomic_radius + mean_atomic_mass
+    + wtd_mean_fie + wtd_entropy_ElectronAffinity + wtd_entropy_Density
+    + wtd_mean_atomic_mass + mean_ElectronAffinity + mean_Density
+    + number_of_elements + wtd_entropy_fie + range_atomic_radius
+    + wtd_mean_ThermalConductivity + wtd_mean_fie:range_atomic_radius
+    + range_atomic_radius:wtd_entropy_Density + wtd_entropy_Density:wtd_entropy_ElectronAffinity
+    + range_atomic_radius:wtd_mean_ElectronAffinity + wtd_mean_fie:wtd_mean_ThermalConductivity
+    + number_of_elements:wtd_mean_atomic_mass + range_atomic_radius:mean_Density
+    + mean_atomic_mass:range_atomic_radius + wtd_entropy_fie:wtd_mean_atomic_radius
+    + wtd_mean_atomic_radius:wtd_entropy_ElectronAffinity
+    + wtd_mean_ElectronAffinity:wtd_mean_ThermalConductivity
+    + wtd_mean_atomic_mass:wtd_mean_ThermalConductivity
+    + number_of_elements:wtd_mean_ThermalConductivity
+    + mean_atomic_mass:wtd_entropy_fie + mean_atomic_mass:wtd_entropy_ElectronAffinity
+    + wtd_mean_atomic_radius:range_atomic_radius + number_of_elements:wtd_mean_atomic_radius
+    + number_of_elements:wtd_mean_ElectronAffinity + number_of_elements:mean_ElectronAffinity
+    + wtd_mean_atomic_mass:wtd_entropy_fie + mean_atomic_mass:wtd_mean_fie
+    + mean_atomic_mass:wtd_mean_atomic_radius + wtd_mean_fie:mean_Density
+    + range_atomic_radius:wtd_entropy_ElectronAffinity + mean_atomic_mass:wtd_entropy_Density
+    + wtd_entropy_Density:wtd_mean_ElectronAffinity
+    + wtd_entropy_fie:wtd_mean_ThermalConductivity + wtd_mean_fie:wtd_mean_atomic_radius
+    + wtd_mean_atomic_radius:wtd_mean_ElectronAffinity
+    + mean_atomic_mass:wtd_mean_ElectronAffinity + mean_Density:wtd_mean_ElectronAffinity
+    + wtd_mean_atomic_radius:mean_ElectronAffinity + wtd_mean_atomic_mass:range_atomic_radius
+    + wtd_entropy_Density:wtd_mean_ThermalConductivity + mean_Density:wtd_mean_ThermalConductivity
+    + mean_atomic_mass:wtd_mean_ThermalConductivity
+    + mean_ElectronAffinity:wtd_mean_ThermalConductivity
+    + wtd_entropy_ElectronAffinity:wtd_mean_ThermalConductivity
+    + number_of_elements:wtd_entropy_ElectronAffinity + number_of_elements:wtd_entropy_fie
+    + wtd_mean_atomic_mass:wtd_entropy_Density + wtd_mean_atomic_radius:wtd_entropy_Density
+    + mean_ElectronAffinity:wtd_mean_ElectronAffinity + wtd_mean_fie:mean_ElectronAffinity
+    + number_of_elements:mean_Density + wtd_entropy_fie:mean_Density
+    + mean_Density:wtd_entropy_Density + wtd_mean_fie:wtd_entropy_ElectronAffinity
+    + number_of_elements:wtd_mean_fie + wtd_mean_fie:wtd_mean_ElectronAffinity
+    + wtd_entropy_fie:wtd_entropy_ElectronAffinity + wtd_entropy_fie:wtd_entropy_Density
+    + wtd_entropy_fie:mean_ElectronAffinity, 
+    data = superconductivity
+)
+
+temp_model_linearity_ass_reduced_1 <- ols_step_forward_p(temp_model_linearity_ass,
+                                                         p_val = 0.01, details = FALSE)
+summary(temp_model_linearity_ass_reduced_1$model)
+```
+
+```{r}
+selected_vars <- attr(terms(temp_model_linearity_ass_reduced_1$model), "term.labels")
+predictor_vars <- paste(selected_vars, collapse = " + ")
+print(predictor_vars)
+```
+
+```{r}
+# -range_atomic_radius:wtd_entropy_ElectronAffinity 
+temp_model_linearity_ass_reduced_2 <- lm(
+    log_critical_temp ~ range_atomic_radius + wtd_entropy_ElectronAffinity + wtd_mean_ThermalConductivity + wtd_mean_fie + wtd_entropy_Density + mean_atomic_mass + mean_ElectronAffinity + wtd_mean_ElectronAffinity + wtd_mean_atomic_mass + wtd_mean_atomic_radius + wtd_entropy_fie + number_of_elements + mean_Density + wtd_mean_ElectronAffinity:mean_ElectronAffinity + range_atomic_radius:wtd_mean_ThermalConductivity + range_atomic_radius:wtd_mean_fie + wtd_entropy_ElectronAffinity:wtd_mean_fie + mean_ElectronAffinity:wtd_entropy_fie + wtd_mean_ThermalConductivity:wtd_mean_fie + wtd_entropy_ElectronAffinity:wtd_mean_atomic_radius + wtd_entropy_Density:wtd_mean_atomic_radius + wtd_entropy_ElectronAffinity:wtd_mean_ThermalConductivity + mean_ElectronAffinity:wtd_mean_ThermalConductivity + wtd_mean_atomic_radius:wtd_entropy_fie + mean_atomic_mass:wtd_mean_atomic_radius + wtd_mean_fie:mean_atomic_mass + wtd_mean_fie:mean_Density + range_atomic_radius:wtd_mean_atomic_mass + wtd_mean_ElectronAffinity:number_of_elements + wtd_entropy_ElectronAffinity:wtd_entropy_fie + wtd_mean_ElectronAffinity:mean_atomic_mass + wtd_mean_ThermalConductivity:mean_atomic_mass + range_atomic_radius:mean_atomic_mass + wtd_mean_fie:wtd_mean_atomic_radius + wtd_mean_ElectronAffinity:wtd_mean_atomic_radius + wtd_mean_ThermalConductivity:mean_Density + wtd_entropy_Density:mean_Density + wtd_mean_ElectronAffinity:wtd_mean_ThermalConductivity + wtd_mean_atomic_mass:wtd_entropy_fie + wtd_entropy_Density:wtd_mean_atomic_mass + wtd_mean_ThermalConductivity:wtd_entropy_Density + mean_ElectronAffinity:wtd_mean_atomic_radius + wtd_entropy_ElectronAffinity:number_of_elements + mean_atomic_mass:wtd_entropy_fie + wtd_entropy_Density:mean_atomic_mass + wtd_entropy_fie:mean_Density + range_atomic_radius:wtd_entropy_Density + wtd_entropy_ElectronAffinity:mean_atomic_mass + wtd_mean_ThermalConductivity:wtd_entropy_fie + wtd_mean_fie:number_of_elements + wtd_mean_atomic_radius:number_of_elements + range_atomic_radius:mean_Density + wtd_mean_ThermalConductivity:wtd_mean_atomic_mass + mean_ElectronAffinity:number_of_elements + number_of_elements:mean_Density + mean_ElectronAffinity:wtd_mean_fie + wtd_mean_ElectronAffinity:wtd_mean_fie + wtd_mean_ThermalConductivity:number_of_elements + wtd_entropy_ElectronAffinity:wtd_entropy_Density, data = superconductivity
+)
+summary(temp_model_linearity_ass_reduced_2)
+```
+
+```{r}
+# -wtd_mean_ThermalConductivity:mean_ElectronAffinity 
+temp_model_linearity_ass_reduced_3 <- lm(
+    log_critical_temp ~ range_atomic_radius + wtd_entropy_ElectronAffinity + wtd_mean_ThermalConductivity + wtd_mean_fie + wtd_entropy_Density + mean_atomic_mass + mean_ElectronAffinity + wtd_mean_ElectronAffinity + wtd_mean_atomic_mass + wtd_mean_atomic_radius + wtd_entropy_fie + number_of_elements + mean_Density + wtd_mean_ElectronAffinity:mean_ElectronAffinity + range_atomic_radius:wtd_mean_ThermalConductivity + range_atomic_radius:wtd_mean_fie + wtd_entropy_ElectronAffinity:wtd_mean_fie + mean_ElectronAffinity:wtd_entropy_fie + wtd_mean_ThermalConductivity:wtd_mean_fie + wtd_entropy_ElectronAffinity:wtd_mean_atomic_radius + wtd_entropy_Density:wtd_mean_atomic_radius + wtd_entropy_ElectronAffinity:wtd_mean_ThermalConductivity + wtd_mean_atomic_radius:wtd_entropy_fie + mean_atomic_mass:wtd_mean_atomic_radius + wtd_mean_fie:mean_atomic_mass + wtd_mean_fie:mean_Density + range_atomic_radius:wtd_mean_atomic_mass + wtd_mean_ElectronAffinity:number_of_elements + wtd_entropy_ElectronAffinity:wtd_entropy_fie + wtd_mean_ElectronAffinity:mean_atomic_mass + wtd_mean_ThermalConductivity:mean_atomic_mass + range_atomic_radius:mean_atomic_mass + wtd_mean_fie:wtd_mean_atomic_radius + wtd_mean_ElectronAffinity:wtd_mean_atomic_radius + wtd_mean_ThermalConductivity:mean_Density + wtd_entropy_Density:mean_Density + wtd_mean_ElectronAffinity:wtd_mean_ThermalConductivity + wtd_mean_atomic_mass:wtd_entropy_fie + wtd_entropy_Density:wtd_mean_atomic_mass + wtd_mean_ThermalConductivity:wtd_entropy_Density + mean_ElectronAffinity:wtd_mean_atomic_radius + wtd_entropy_ElectronAffinity:number_of_elements + mean_atomic_mass:wtd_entropy_fie + wtd_entropy_Density:mean_atomic_mass + wtd_entropy_fie:mean_Density + range_atomic_radius:wtd_entropy_Density + wtd_entropy_ElectronAffinity:mean_atomic_mass + wtd_mean_ThermalConductivity:wtd_entropy_fie + wtd_mean_fie:number_of_elements + wtd_mean_atomic_radius:number_of_elements + range_atomic_radius:mean_Density + wtd_mean_ThermalConductivity:wtd_mean_atomic_mass + mean_ElectronAffinity:number_of_elements + number_of_elements:mean_Density + mean_ElectronAffinity:wtd_mean_fie + wtd_mean_ElectronAffinity:wtd_mean_fie + wtd_mean_ThermalConductivity:number_of_elements + wtd_entropy_ElectronAffinity:wtd_entropy_Density, data = superconductivity
+)
+summary(temp_model_linearity_ass_reduced_3)
+```
+
+```{r}
+# -wtd_entropy_ElectronAffinity:wtd_entropy_fie 
+temp_model_linearity_ass_reduced_4 <- lm(
+    log_critical_temp ~ range_atomic_radius + wtd_entropy_ElectronAffinity + wtd_mean_ThermalConductivity + wtd_mean_fie + wtd_entropy_Density + mean_atomic_mass + mean_ElectronAffinity + wtd_mean_ElectronAffinity + wtd_mean_atomic_mass + wtd_mean_atomic_radius + wtd_entropy_fie + number_of_elements + mean_Density + wtd_mean_ElectronAffinity:mean_ElectronAffinity + range_atomic_radius:wtd_mean_ThermalConductivity + range_atomic_radius:wtd_mean_fie + wtd_entropy_ElectronAffinity:wtd_mean_fie + mean_ElectronAffinity:wtd_entropy_fie + wtd_mean_ThermalConductivity:wtd_mean_fie + wtd_entropy_ElectronAffinity:wtd_mean_atomic_radius + wtd_entropy_Density:wtd_mean_atomic_radius + wtd_entropy_ElectronAffinity:wtd_mean_ThermalConductivity + wtd_mean_atomic_radius:wtd_entropy_fie + mean_atomic_mass:wtd_mean_atomic_radius + wtd_mean_fie:mean_atomic_mass + wtd_mean_fie:mean_Density + range_atomic_radius:wtd_mean_atomic_mass + wtd_mean_ElectronAffinity:number_of_elements + wtd_mean_ElectronAffinity:mean_atomic_mass + wtd_mean_ThermalConductivity:mean_atomic_mass + range_atomic_radius:mean_atomic_mass + wtd_mean_fie:wtd_mean_atomic_radius + wtd_mean_ElectronAffinity:wtd_mean_atomic_radius + wtd_mean_ThermalConductivity:mean_Density + wtd_entropy_Density:mean_Density + wtd_mean_ElectronAffinity:wtd_mean_ThermalConductivity + wtd_mean_atomic_mass:wtd_entropy_fie + wtd_entropy_Density:wtd_mean_atomic_mass + wtd_mean_ThermalConductivity:wtd_entropy_Density + mean_ElectronAffinity:wtd_mean_atomic_radius + wtd_entropy_ElectronAffinity:number_of_elements + mean_atomic_mass:wtd_entropy_fie + wtd_entropy_Density:mean_atomic_mass + wtd_entropy_fie:mean_Density + range_atomic_radius:wtd_entropy_Density + wtd_entropy_ElectronAffinity:mean_atomic_mass + wtd_mean_ThermalConductivity:wtd_entropy_fie + wtd_mean_fie:number_of_elements + wtd_mean_atomic_radius:number_of_elements + range_atomic_radius:mean_Density + wtd_mean_ThermalConductivity:wtd_mean_atomic_mass + mean_ElectronAffinity:number_of_elements + number_of_elements:mean_Density + mean_ElectronAffinity:wtd_mean_fie + wtd_mean_ElectronAffinity:wtd_mean_fie + wtd_mean_ThermalConductivity:number_of_elements + wtd_entropy_ElectronAffinity:wtd_entropy_Density, data = superconductivity
+)
+summary(temp_model_linearity_ass_reduced_4)
 ```
 
 ### Independence Assumption
@@ -745,7 +825,19 @@ The independence assumption in regression means that residuals should not influe
 ### Equal Variance Assumption
 
 ```{r}
-
-
-
+ggplot(temp_model_linearity_ass_reduced_4, aes(x=.fitted, y=.resid)) + geom_point() + geom_smooth() +
+  geom_hline(yintercept=0) + ggtitle("Residual plot: Residual vs Fitted values")
 ```
+
+```{r}
+ggplot(temp_model_linearity_ass_reduced_4, aes(x=.fitted, y=sqrt(abs(.stdresid)))) + geom_point() +
+  geom_smooth() + geom_hline(yintercept=0) +
+  ggtitle("Scale-Location plot: Standardized Residual vs Fitted values")
+```
+
+```{r}
+bptest(temp_model_linearity_ass_reduced_4)
+```
+
+We reject the null hypothesis (p-value < 0.05), concluding that heteroscedasticity exists.
+

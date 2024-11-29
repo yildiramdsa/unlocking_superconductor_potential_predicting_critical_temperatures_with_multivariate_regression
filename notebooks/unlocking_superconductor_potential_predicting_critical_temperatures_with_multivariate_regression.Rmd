@@ -522,10 +522,6 @@ imcdiag(final_model_additive, method="VIF")
 
 According to the output, the predictors are not affected by multicollinearity.
 
-```{r}
-anova(final_model_additive, temp_model_additive)
-```
-
 The model will be expanded to include interaction terms:
 
 ```{r}
@@ -631,51 +627,6 @@ temp_model_int_reduced_3 = lm(critical_temp ~ range_atomic_radius:wtd_mean_Therm
                      +wtd_entropy_fie:wtd_entropy_ElectronAffinity+wtd_entropy_fie:wtd_entropy_Density
                      +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
 summary(temp_model_int_reduced_3)
-```
-
-```{r}
-final_model_int = lm(critical_temp ~ range_atomic_radius:wtd_mean_ThermalConductivity
-                 +wtd_mean_ElectronAffinity+wtd_mean_atomic_radius+mean_atomic_mass
-                 +wtd_mean_fie+wtd_entropy_ElectronAffinity+wtd_entropy_Density+wtd_mean_atomic_mass
-                 +mean_ElectronAffinity+mean_Density+number_of_elements+wtd_entropy_fie
-                 +range_atomic_radius+wtd_mean_ThermalConductivity+wtd_mean_fie:range_atomic_radius
-                 +range_atomic_radius:wtd_entropy_Density
-                 +wtd_entropy_Density:wtd_entropy_ElectronAffinity
-                 +range_atomic_radius:wtd_mean_ElectronAffinity+wtd_mean_fie:wtd_mean_ThermalConductivity
-                 +number_of_elements:wtd_mean_atomic_mass+range_atomic_radius:mean_Density
-                 +mean_atomic_mass:range_atomic_radius+wtd_entropy_fie:wtd_mean_atomic_radius
-                 +wtd_mean_atomic_radius:wtd_entropy_ElectronAffinity
-                 +wtd_mean_ElectronAffinity:wtd_mean_ThermalConductivity
-                 +wtd_mean_atomic_mass:wtd_mean_ThermalConductivity
-                 +number_of_elements:wtd_mean_ThermalConductivity
-                 +mean_atomic_mass:wtd_entropy_fie+mean_atomic_mass:wtd_entropy_ElectronAffinity
-                 +wtd_mean_atomic_radius:range_atomic_radius+number_of_elements:wtd_mean_atomic_radius
-                 +number_of_elements:wtd_mean_ElectronAffinity+number_of_elements:mean_ElectronAffinity
-                 +wtd_mean_atomic_mass:wtd_entropy_fie+mean_atomic_mass:wtd_mean_fie
-                 +mean_atomic_mass:wtd_mean_atomic_radius+wtd_mean_fie:mean_Density
-                 +range_atomic_radius:wtd_entropy_ElectronAffinity+mean_atomic_mass:wtd_entropy_Density
-                 +wtd_entropy_Density:wtd_mean_ElectronAffinity
-                 +wtd_entropy_fie:wtd_mean_ThermalConductivity+wtd_mean_fie:wtd_mean_atomic_radius
-                 +wtd_mean_atomic_radius:wtd_mean_ElectronAffinity
-                 +mean_atomic_mass:wtd_mean_ElectronAffinity+mean_Density:wtd_mean_ElectronAffinity
-                 +wtd_mean_atomic_radius:mean_ElectronAffinity+wtd_mean_atomic_mass:range_atomic_radius
-                 +wtd_entropy_Density:wtd_mean_ThermalConductivity+mean_Density:wtd_mean_ThermalConductivity
-                 +mean_atomic_mass:wtd_mean_ThermalConductivity
-                 +mean_ElectronAffinity:wtd_mean_ThermalConductivity
-                 +wtd_entropy_ElectronAffinity:wtd_mean_ThermalConductivity
-                 +number_of_elements:wtd_entropy_ElectronAffinity+number_of_elements:wtd_entropy_fie
-                 +wtd_mean_atomic_mass:wtd_entropy_Density+wtd_mean_atomic_radius:wtd_entropy_Density
-                 +mean_ElectronAffinity:wtd_mean_ElectronAffinity+wtd_mean_fie:mean_ElectronAffinity
-                 +number_of_elements:mean_Density+wtd_entropy_fie:mean_Density
-                 +mean_Density:wtd_entropy_Density+wtd_mean_fie:wtd_entropy_ElectronAffinity
-                 +number_of_elements:wtd_mean_fie+wtd_mean_fie:wtd_mean_ElectronAffinity
-                 +wtd_entropy_fie:wtd_entropy_ElectronAffinity+wtd_entropy_fie:wtd_entropy_Density
-                 +wtd_entropy_fie:mean_ElectronAffinity, data=superconductivity)
-summary(final_model_int)
-```
-
-```{r}
-anova(final_model_int, temp_model_int)
 ```
 
 ### Linearity Assumption

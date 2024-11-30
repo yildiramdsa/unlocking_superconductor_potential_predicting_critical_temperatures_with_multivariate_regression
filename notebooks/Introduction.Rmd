@@ -1,0 +1,153 @@
+---
+title: "603 Group Project Intro"
+author: "Data 603 Group [IDK what our group number is]"
+date: "2024-11-30"
+output:
+  pdf_document: default
+  html_notebook: default
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Predicting Superconductor Critical Temperatures with Multivariate Regression
+
+Alina Yildir UCID:
+
+Archana Senthil UCID:
+
+Gurmol Sohi UCID:
+
+Trevor Yonkman UCID:
+
+William Hovdestad UCID: 30248416
+
+# Introduction
+
+------------------------------------------------------------------------
+
+## 1.1 MOTIVATION
+
+### 1.1.1 Context
+
+Certain materials exhibit the property of superconductivity, meaning
+that, under certain conditions, they can carry an electrical current
+with no losses. Since the discovery of the first superconductor in 1911
+[1], which showed these properties in mercury below a Critical
+Temperature (Tc) of 4.2 Kelvin (-269 °C), researchers have looked for
+materials with superconducting properties at higher and higher
+temperatures. Applications of superconductors include medical imaging
+[2] and quantum computing [3], with each becoming significantly cheaper
+and more scalable as more favorable materials are found.
+
+### 1.1.2 Problem
+
+By modeling data from known materials, this report will attempt to
+identify parameters of significance leading to higher values of Tc. This
+may provide some clues for the properties that researchers should look
+for in newly proposed materials. There is some research precedent
+investigating new materials using statistical methods, with some success
+[4]. Methods carried out in prior research include linear regression, as
+well as more complex machine learning techniques like artificial neural
+networks and gradient boosting decision trees [5].
+
+### 1.1.3 Challenges
+
+One recent well-known example which speaks to the difficulty of
+discovering these materials was proposed by researchers [6] at Korea
+University in July 2023. This material, a grey-black, polycrystalline
+compound, identified as a copper-doped lead-oxyapatite and named LK-99
+by the team which discovered it, was claimed to exhibit superconducting
+properties at room temperature and ambient pressure. While the results
+were never replicated, the months following LK-99’s publicity saw a
+flurry of media reporting on the great significance of what this
+discovery would mean for new technologies [7].
+
+Challenges specific to discovering new materials through linear
+regression include:
+
+1.  Non-linear relationships\
+    Superconductivity is governed by complex physical phenomena that
+    often exhibit non-linear relationships. Linear regression assumes a
+    linear relationship between variables, which may not capture these
+    complexities accurately.
+
+2.  High dimensionality\
+    Superconducting materials are characterized by numerous properties,
+    such as first ionization energy, atomic radius, electron affinity,
+    and fusion heat. This high-dimensional data must be handled
+    carefully to avoid overfitting.
+
+3.  Limited data availability.\
+    Experimental data on superconducting materials is scarce and often
+    noisy. Linear regression models require a large amount of data to
+    produce reliable predictions, and limited data can lead to
+    inaccurate models.
+
+------------------------------------------------------------------------
+
+## 1.2 OBJECTIVES
+
+### 1.2.1 Overview
+
+The overall intent of the project is to create a regression model to
+predict the Critical Temperature (Tc) of different materials. An
+accurate regression model to predict Tc can be used to identify which
+factors lead to a higher Tc. However, great care must be taken if
+looking for Tc values above the range of values used in creating our
+model.
+
+### 1.2.2 Goals & Research Questions
+
+What combination of factors are the most accurate for predicting the
+Critical Temperature (Tc) of a given material?
+
+What factors should a material scientist focus on when looking for new
+superconductor materials?
+
+Can we use the measured properties of existing materials to accurately
+predict a new (hypotheical) super-conductor material with higher Tc then
+currently existing materials?
+
+------------------------------------------------------------------------
+
+## 1.3 INTRODUCTION-REFERENCES
+
+References
+
+1.  CERN. (n.d.) Superconductivity. Retrieved from
+    <https://home.cern/science/engineering/superconductivity> [Accessed:
+    Nov 8, 2024]
+
+2.  Questions and Answers in MRI. (n.d.) Superconducting Magnets.
+    Retrieved from
+    <https://mriquestions.com/superconductive-design.html>. [Accessed:
+    Nov 8, 2024]
+
+3.  Pennylane. (n.d.) Quantum Computing with Superconducting Qubits.
+    Retrieved from <https://pennylane.ai/qml/demos/tutorial_sc_qubits/>.
+    [Accessed: Nov 8, 2024]
+
+4.  SN Applied Sciences (n.d.) Prediction of critical temperature and
+    new superconducting materials \| Discover Applied Sciences.
+    Retrieved from
+    <https://link.springer.com/article/10.1007/s42452-020-03266-0?form=MG0AV3>
+    [Accessed: Nov 29, 2024]
+
+5.  MDPI Open Access Journals (n.d.) Predictive Modeling of Critical
+    Temperatures in Superconducting Materials. Retrieved from
+    <https://www.mdpi.com/1420-3049/26/1/8?form=MG0AV3> [Accessed: Nov
+    29, 2024]
+
+6.  Cornell University (n.d.) The First Room-Temperature
+    Ambient-Pressure Superconductor. Retrieved from
+    <https://arxiv.org/abs/2307.12008> [Accessed: Nov 29, 2024]
+
+7.  CBC (n.d.) Claims of revolutionary superconductor LK-99 are meeting
+    resistance. Here's what you need to know. Retrieved from
+    <https://www.cbc.ca/news/science/lk99-superconductor-resistance-explainer-1.6929966>
+    [Accessed: Nov 29, 2024]

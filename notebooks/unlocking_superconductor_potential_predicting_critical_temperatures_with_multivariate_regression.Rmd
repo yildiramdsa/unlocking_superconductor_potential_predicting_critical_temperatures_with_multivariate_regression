@@ -1148,3 +1148,34 @@ sample_res <- sample(residuals(temp_model_linearity_ass), 5000)
 shapiro.test(sample_res)
 ```
 
+##Outliers
+
+```{r}
+plot(final_reduced, which=5)
+```
+
+```{r}
+data = superconductivity
+```
+
+
+```{r}
+superconductivity[cooks.distance(final_reduced)> 0.5]
+```
+```{r}
+plot(final_reduced,pch=18,col="red",which=c(4))
+```
+
+```{r}
+lev=hatvalues(final_reduced)
+p = length(coef(final_reduced))
+n = nrow(final_reduced)
+outlier3p = lev[lev>(3*p/n)]
+print(outlier3p)
+```
+
+```{r}
+plot(rownames(final_reduced),lev, main = "Leverage in superconductivity Dataset",xlab= "observation", ylab = "Leverage Value")
+abline(h = 2 *p/n, lty = 1)
+abline(h = 3 *p/n, lty = 1)
+```

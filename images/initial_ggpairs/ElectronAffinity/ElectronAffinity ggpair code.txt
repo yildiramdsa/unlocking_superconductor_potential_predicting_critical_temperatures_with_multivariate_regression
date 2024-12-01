@@ -1,6 +1,0 @@
-ElectronAffinity = superconductivity[, c("mean_ElectronAffinity", "wtd_mean_ElectronAffinity",
-                                         "gmean_ElectronAffinity", "wtd_gmean_ElectronAffinity",
-                                         "wtd_entropy_ElectronAffinity", "range_ElectronAffinity",
-                                         "wtd_range_ElectronAffinity", "std_ElectronAffinity",
-                                         "wtd_std_ElectronAffinity")]
-plot_ggpairs(ElectronAffinity)

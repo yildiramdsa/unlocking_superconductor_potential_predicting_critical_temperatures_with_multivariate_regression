@@ -1,3 +1,0 @@
-Valence = superconductivity[, c("gmean_Valence", "wtd_gmean_Valence", "entropy_Valence",
-                                "wtd_entropy_Valence", "range_Valence", "wtd_std_Valence")]
-plot_ggpairs(Valence)

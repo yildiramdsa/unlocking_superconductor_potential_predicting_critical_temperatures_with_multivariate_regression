@@ -1,0 +1,4 @@
+fie = superconductivity[, c("mean_fie", "wtd_mean_fie", "gmean_fie", "wtd_gmean_fie",
+                            "entropy_fie", "wtd_entropy_fie", "range_fie",
+                            "wtd_range_fie", "std_fie")]
+plot_ggpairs(fie)

@@ -1,0 +1,9 @@
+ThermalConductivity = superconductivity[, c("mean_ThermalConductivity",
+                                            "wtd_mean_ThermalConductivity",
+                                            "gmean_ThermalConductivity",
+                                            "wtd_gmean_ThermalConductivity",
+                                            "entropy_ThermalConductivity",
+                                            "range_ThermalConductivity",
+                                            "wtd_range_ThermalConductivity",
+                                            "std_ThermalConductivity")]
+plot_ggpairs(ThermalConductivity)

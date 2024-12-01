@@ -1,0 +1,6 @@
+FusionHeat = superconductivity[, c("mean_FusionHeat", "wtd_mean_FusionHeat",
+                                   "gmean_FusionHeat", "wtd_gmean_FusionHeat",
+                                   "entropy_FusionHeat", "wtd_entropy_FusionHeat",
+                                   "range_FusionHeat", "wtd_range_FusionHeat",
+                                   "wtd_std_FusionHeat")]
+plot_ggpairs(FusionHeat)

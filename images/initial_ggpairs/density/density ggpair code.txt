@@ -1,0 +1,4 @@
+density = superconductivity[, c("mean_Density", "gmean_Density", "wtd_gmean_Density",
+                                "entropy_Density", "wtd_entropy_Density",
+                                "range_Density", "std_Density", "wtd_std_Density")]
+plot_ggpairs(density)
